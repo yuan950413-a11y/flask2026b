@@ -4,7 +4,6 @@ def Split(x):
 	print(f"學校:{school}")
 	print(f"姓名:{x[2]}")
 
-# 只有直接執行 example1.py 時，以下程式才會跑
 if __name__ == "__main__":
-	Name = "我是靜宜大學,資管二B,楊子青"
+	Name = "我是靜宜大學,資管二B,吳育安"
 	Split(Name)

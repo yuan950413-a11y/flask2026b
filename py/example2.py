@@ -1,4 +1,4 @@
 from example1 import Split
 
-Name = "我是靜宜大學,資管二B,tcyang"
+Name = "我是靜宜大學,資管二B,Yu-An Wu"
 Split(Name)

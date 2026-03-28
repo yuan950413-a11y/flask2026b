@@ -9,8 +9,9 @@ def index():
     link += "<a href='/mis'>課程</a><hr>"
     link += "<a href='/today'>現在日期時間</a><hr>"
     link += "<a href='/me'>關於我</a><hr>"
-    link += "<a href='/welcome?u=吳育安&d=資管'>Get傳值</a><hr>"
-    link += "<a href=/account>POST</a><hr>"
+    link += "<a href=/welcome?u=育安&d=靜宜資管&c=資訊管理導論>GET傳值</a><hr>"
+    link += "<a href=/account>POST傳值</a><hr>"
+    link += "<a href=/math>次方與根號計算</a><hr>"
     return link
 
 @app.route("/mis")
@@ -24,25 +25,54 @@ def today():
 
 @app.route("/me")
 def me():
-    return render_template("mis2026b.html")
+    return render_template("about.html")
 
 @app.route("/welcome", methods=["GET"])
 def welcome():
-    # 使用 .get() 更安全
     user = request.values.get("u")
     d = request.values.get("d")
-    return render_template("welcome.html", name=user, dep=d)
+    c = request.values.get("c")    
+    return render_template("welcome.html", name= user, dep = d, course = c)
 
 @app.route("/account", methods=["GET", "POST"])
 def account():
     if request.method == "POST":
-        # 使用 .get 預防 KeyError
-        user = request.form.get["user"]
-        pwd = request.form.get["pwd"]
-        result = "您輸入的帳號是：{user}; 密碼為：{pwd}"
+        user = request.form.get("user")
+        pwd = request.form.get("pwd")
+        result = f"您輸入的帳號是：{user}; 密碼為：{pwd}"
         return result
     else:
         return render_template("account.html")
+
+@app.route("/math", methods=["GET", "POST"])
+def math():
+    result = None
+    x = y = opt = None
+
+    if request.method == "POST":
+        try:
+            x = float(request.form["x"])
+            opt = request.form["opt"]
+            y = float(request.form["y"])
+
+            if opt == "∧":
+                result = x ** y
+
+            elif opt == "√":
+                if x < 0:
+                    result = "負數不能開根號"
+                elif y == 0:
+                    result = "根號次數不能為0"
+                else:
+                    result = x ** (1 / y)
+
+            else:
+                result = "未知運算"
+
+        except:
+            result = "輸入錯誤"
+
+    return render_template("math.html", result=result, x=x, y=y, opt=opt)
 
 if __name__ == "__main__":
     app.run(debug=True)
