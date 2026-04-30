@@ -36,7 +36,7 @@ def index():
     link += "<a href=/read2>讀取Firestore資料(根據姓名關鍵字)</a><hr>"
     link += "<a href=/spider1>爬取子青老師本學期課程</a><hr>"
     link += "<a href=/spidermovie>爬取即將上映電影</a><hr>"
-    link += "<a href=/spierMovie>爬取即將上映電影</a><hr>"
+    link += "<a href=/spierM=movie>爬取即將上映電影</a><hr>"
     link += "<a href=/searchMovie>爬取即將上映電影</a><hr>"
 
     return link
